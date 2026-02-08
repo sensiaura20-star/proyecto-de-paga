@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SensiAura">
+<title>SensiAura - Free Fire External</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+<style>
+:root{--bg:#0a0a0a;--panel:#0f0f0f;--accent:#ff4655;--accent-hover:#e03d4b;--accent-2:#ff6b78;--muted:#9ca3af;--text:#e5e7eb;--success:#10b981;--warning:#f59e0b;--error:#ef4444;--glass:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.08);--terminal-bg:#0d1117;--terminal-text:#00ff41}*{box-sizing:border-box;margin:0;padding:0}body,html{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{background:#000;min-height:100vh;color:var(--text);overflow-x:hidden;position:relative}body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 20% 50%,rgba(255,70,85,0.08),transparent 40%),radial-gradient(circle at 80% 80%,rgba(255,107,120,0.08),transparent 40%);pointer-events:none;z-index:0}.container{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}canvas#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.4;z-index:0}.card{width:100%;max-width:440px;background:linear-gradient(135deg,rgba(17,17,17,0.95),rgba(10,10,10,0.95));backdrop-filter:blur(20px);border-radius:20px;padding:0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.05);position:relative}.card-header{padding:32px 24px;background:linear-gradient(135deg,rgba(255,70,85,0.15),rgba(255,107,120,0.05));border-bottom:1px solid var(--border);position:relative;overflow:hidden}.card-header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,70,85,0.15),transparent 70%);animation:pulse 8s ease-in-out infinite}.logo-wrapper{display:flex;align-items:center;gap:16px;position:relative;z-index:1}.logo{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:24px;box-shadow:0 8px 16px rgba(255,70,85,0.3),inset 0 1px 0 rgba(255,255,255,0.2);position:relative}.logo::after{content:'';position:absolute;inset:0;border-radius:14px;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.1));pointer-events:none}h1{font-size:24px;font-weight:700;background:linear-gradient(135deg,#fff,var(--muted));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.5px}.subtitle{color:var(--muted);font-size:13px;margin-top:4px;font-weight:500}.card-body{padding:24px}.form-group{margin-bottom:20px}.label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px}.input{width:100%;padding:14px 16px;background:var(--glass);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:15px;outline:none;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);transform:scale(1)}.input:focus{border-color:var(--accent);background:rgba(255,70,85,0.08);box-shadow:0 0 0 4px rgba(255,70,85,0.15),0 4px 12px rgba(255,70,85,0.2);transform:scale(1.02)}.input::placeholder{color:rgba(156,163,175,0.5)}.btn{width:100%;padding:14px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden;transform:scale(1)}.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent);opacity:0;transition:opacity 0.4s}.btn::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,255,255,0.4);transform:translate(-50%,-50%);transition:width 0.6s,height 0.6s}.btn:hover::before{opacity:1}.btn:active::after{width:300px;height:300px;transition:width 0.1s,height 0.1s}.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 4px 12px rgba(255,70,85,0.4);margin-bottom:12px}.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 25px rgba(255,70,85,0.6)}.btn-primary:active{transform:translateY(-1px) scale(0.98);box-shadow:0 3px 10px rgba(255,70,85,0.4)}.btn-secondary{background:var(--glass);color:var(--text);border:1px solid var(--border)}.btn-secondary:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);transform:translateY(-2px) scale(1.01);box-shadow:0 4px 15px rgba(255,70,85,0.2)}.btn-secondary:active{transform:translateY(0) scale(0.98)}.alert{padding:12px 16px;border-radius:10px;margin-bottom:16px;font-size:13px;font-weight:600;display:none}.alert.show{display:block;animation:slideDown 0.3s ease}.alert-success{background:rgba(16,185,129,0.1);color:var(--success);border:1px solid rgba(16,185,129,0.2)}.alert-error{background:rgba(239,68,68,0.1);color:var(--error);border:1px solid rgba(239,68,68,0.2)}.alert-warning{background:rgba(245,158,11,0.1);color:var(--warning);border:1px solid rgba(245,158,11,0.2)}.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px;background:var(--glass);padding:6px;border-radius:12px;border:1px solid var(--border)}.tab{padding:12px;border-radius:8px;text-align:center;font-weight:600;font-size:13px;color:var(--muted);cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);border:1px solid transparent;position:relative;transform:scale(1)}.tab::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--accent);transition:width 0.4s cubic-bezier(0.34,1.56,0.64,1)}.tab:hover{color:var(--text);background:rgba(255,255,255,0.05);transform:translateY(-2px) scale(1.02)}.tab:hover::before{width:60%}.tab.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 4px 15px rgba(255,70,85,0.4);transform:scale(1.05);animation:tabActivate 0.5s ease}.tab.active::before{width:100%}@keyframes tabActivate{0%{transform:scale(0.95)}50%{transform:scale(1.08)}100%{transform:scale(1.05)}}.tab-content{display:none;animation:fadeIn 0.3s ease}.tab-content.active{display:block}.feature-card{background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:14px;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden;transform:scale(1);backdrop-filter:blur(10px)}.feature-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,70,85,0.05));opacity:0;transition:opacity 0.4s}.feature-card::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,70,85,0.15),transparent);transition:left 0.6s}.feature-card:hover{border-color:rgba(255,70,85,0.5);transform:translateY(-4px) scale(1.01);box-shadow:0 10px 30px rgba(255,70,85,0.2),inset 0 1px 0 rgba(255,255,255,0.1)}.feature-card:hover::before{opacity:1}.feature-card:hover::after{left:100%}.feature-card:active{transform:translateY(-2px) scale(0.99)}.feature-card.active{background:linear-gradient(135deg,rgba(255,70,85,0.15),rgba(255,107,120,0.08));border-color:rgba(255,70,85,0.6);box-shadow:0 8px 25px rgba(255,70,85,0.3),inset 0 0 20px rgba(255,70,85,0.1);animation:cardActivate 0.5s ease}.feature-card.active::before{opacity:1;background:linear-gradient(135deg,rgba(255,70,85,0.08),transparent)}@keyframes cardActivate{0%{transform:scale(0.95);opacity:0.8}50%{transform:scale(1.03)}100%{transform:scale(1)}}.feature-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.05)}.feature-title{font-weight:600;font-size:15px;color:var(--text);display:flex;align-items:center;gap:12px;letter-spacing:0.3px}.feature-card.active .feature-title{color:#fff;text-shadow:0 0 10px rgba(255,70,85,0.5)}.feature-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,rgba(255,70,85,0.15),rgba(255,107,120,0.08));display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:16px;box-shadow:0 4px 12px rgba(255,70,85,0.15);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);position:relative}.feature-icon::before{content:'';position:absolute;inset:0;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent);opacity:0;transition:opacity 0.3s}.feature-card:hover .feature-icon{transform:scale(1.1) rotate(5deg);box-shadow:0 6px 18px rgba(255,70,85,0.3)}.feature-card:hover .feature-icon::before{opacity:1}.feature-card.active .feature-icon{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 0 20px rgba(255,70,85,0.6);animation:iconPulse 2s infinite}.feature-card.active .feature-icon::before{opacity:1}@keyframes iconPulse{0%,100%{box-shadow:0 0 20px rgba(255,70,85,0.6)}50%{box-shadow:0 0 30px rgba(255,70,85,0.8),0 0 40px rgba(255,70,85,0.4)}}.toggle{width:54px;height:30px;background:linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.05));border-radius:15px;position:relative;cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);border:2px solid rgba(255,255,255,0.1);box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)}.toggle::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;background:linear-gradient(135deg,#fff,#f0f0f0);border-radius:50%;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 3px 8px rgba(0,0,0,0.3),0 0 0 0 rgba(255,70,85,0)}.toggle:active{transform:scale(0.95)}.toggle:active::after{width:26px}.toggle.active{background:linear-gradient(135deg,#10b981,#059669);border-color:rgba(16,185,129,0.5);box-shadow:0 0 20px rgba(16,185,129,0.4),inset 0 1px 2px rgba(255,255,255,0.2);transform:scale(1.05)}.toggle.active::after{left:27px;background:linear-gradient(135deg,#fff,#f5f5f5);box-shadow:0 3px 12px rgba(16,185,129,0.6),0 0 0 4px rgba(16,185,129,0.2);animation:togglePulse 0.6s ease}.slider-wrapper{margin-top:14px;padding:14px;background:rgba(0,0,0,0.2);border-radius:10px;border:1px solid rgba(255,255,255,0.05);transition:all 0.3s}.feature-card.active .slider-wrapper{background:rgba(255,70,85,0.08);border-color:rgba(255,70,85,0.2)}.slider-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.slider-label{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px}.feature-card.active .slider-label{color:var(--accent)}.slider-value{font-size:15px;font-weight:800;color:var(--accent);background:rgba(255,70,85,0.12);padding:6px 14px;border-radius:8px;border:1px solid rgba(255,70,85,0.25);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(255,70,85,0.15)}.feature-card.active .slider-value{background:rgba(255,70,85,0.2);border-color:rgba(255,70,85,0.4);box-shadow:0 4px 12px rgba(255,70,85,0.3)}.slider{width:100%;height:6px;border-radius:3px;background:var(--glass);outline:none;-webkit-appearance:none;appearance:none;border:1px solid var(--border);transition:all 0.3s}.slider:hover{border-color:rgba(255,70,85,0.5);box-shadow:0 0 12px rgba(255,70,85,0.2)}.slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));cursor:pointer;box-shadow:0 2px 8px rgba(255,70,85,0.4);border:2px solid #fff;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}.slider::-webkit-slider-thumb:hover{transform:scale(1.3);box-shadow:0 4px 16px rgba(255,70,85,0.6)}.slider::-webkit-slider-thumb:active{transform:scale(1.1);box-shadow:0 2px 12px rgba(255,70,85,0.8)}.slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));cursor:pointer;box-shadow:0 2px 8px rgba(255,70,85,0.4);border:2px solid #fff;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}.slider::-moz-range-thumb:hover{transform:scale(1.3)}.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}.stat-card{background:linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px;text-align:center;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden}.stat-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(255,70,85,0.1),transparent);opacity:0;transition:opacity 0.4s}.stat-card:hover{transform:translateY(-4px) scale(1.02);border-color:rgba(255,70,85,0.3);box-shadow:0 8px 20px rgba(255,70,85,0.2)}.stat-card:hover::before{opacity:1}.stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;font-weight:700}.stat-value{font-size:26px;font-weight:900;background:linear-gradient(135deg,#10b981,#059669);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:0 0 20px rgba(16,185,129,0.3);filter:drop-shadow(0 2px 4px rgba(16,185,129,0.2));transition:all 0.3s}.stat-card:hover .stat-value{transform:scale(1.1);filter:drop-shadow(0 4px 8px rgba(16,185,129,0.4))}.footer{padding:24px;border-top:1px solid var(--border);text-align:center}.footer-text{font-size:12px;color:var(--muted)}.footer-text strong{color:var(--accent);font-weight:700}.terminal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.96);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(10px)}.terminal-overlay.show{display:flex;animation:fadeIn 0.3s ease}.terminal-window{width:100%;max-width:600px;background:var(--terminal-bg);border-radius:16px;overflow:hidden;box-shadow:0 25px 50px rgba(0,0,0,0.8);border:1px solid rgba(0,255,65,0.2)}.terminal-header{background:#161b22;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,255,65,0.1)}.terminal-dots{display:flex;gap:8px}.terminal-dot{width:12px;height:12px;border-radius:50%}.terminal-dot.red{background:#ff5f56}.terminal-dot.yellow{background:#ffbd2e}.terminal-dot.green{background:#27c93f}.terminal-title{font-family:'Courier New',monospace;font-size:13px;font-weight:700;color:var(--terminal-text);display:flex;align-items:center;gap:8px}.terminal-body{padding:20px;height:450px;overflow-y:auto;font-family:'Courier New',monospace;font-size:13px;line-height:1.8;background:var(--terminal-bg)}.terminal-line{color:var(--terminal-text);margin-bottom:6px;opacity:0;animation:terminalType 0.15s ease forwards}.terminal-line.success{color:#10b981}.terminal-line.warning{color:#f59e0b}.terminal-line.error{color:#ef4444}.terminal-line.info{color:#3b82f6}.terminal-cursor{display:inline-block;width:10px;height:18px;background:var(--terminal-text);margin-left:5px;animation:cursorBlink 1s infinite}@keyframes cursorBlink{0%,50%{opacity:1}51%,100%{opacity:0}}@keyframes terminalType{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}@keyframes pulse{0%,100%{transform:rotate(0deg)}50%{transform:rotate(180deg)}}@keyframes togglePulse{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}@keyframes tabActivate{0%{transform:scale(0.95)}50%{transform:scale(1.08)}100%{transform:scale(1.05)}}@keyframes cardActivate{0%{transform:scale(0.95);opacity:0.8}50%{transform:scale(1.03)}100%{transform:scale(1)}}@keyframes iconPulse{0%,100%{box-shadow:0 0 20px rgba(255,70,85,0.6)}50%{box-shadow:0 0 30px rgba(255,70,85,0.8),0 0 40px rgba(255,70,85,0.4)}}.status-badge{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:20px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;opacity:0;transition:all 0.4s;pointer-events:none}.feature-card.active .status-badge{opacity:1}.status-badge.active-badge{background:linear-gradient(135deg,#10b981,#059669);color:#fff;box-shadow:0 2px 8px rgba(16,185,129,0.4);animation:badgePulse 2s infinite}@keyframes badgePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}.loading-spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.6s linear infinite;margin-left:8px}@keyframes spin{to{transform:rotate(360deg)}}.hidden{display:none!important}@media(max-width:480px){.card{max-width:100%;border-radius:0}.card-header{padding:24px 20px}.logo{width:48px;height:48px;font-size:20px}h1{font-size:20px}.stats-grid{grid-template-columns:1fr}.tabs{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="container">
+<div class="card">
+<div class="card-header">
+<div class="logo-wrapper">
+<div class="logo">SA</div>
+<div>
+<h1>SENSIAURA EXTERNAL</h1>
+<div class="subtitle">Free Fire Enhancement System v1.0</div>
+</div>
+</div>
+</div>
+
+<!-- Login Section -->
+<div id="loginSection" class="card-body">
+<div id="alertBox" class="alert"></div>
+<div class="form-group">
+<label class="label">License Key</label>
+<input id="keyInput" type="text" class="input" placeholder="SensiAura.2026-hs-3dss" maxlength="50">
+</div>
+<div class="form-group">
+<label class="label">Password</label>
+<input id="passwordInput" type="password" class="input" placeholder="Enter your password">
+</div>
+<button class="btn btn-primary" onclick="validateKey()">
+<i class="fas fa-shield-alt"></i> Validate & Login
+</button>
+<div class="footer">
+<div class="footer-text">Premium License • Contact <strong>@SensiAura</strong></div>
+</div>
+</div>
+
+<!-- Main Panel -->
+<div id="mainPanel" class="card-body hidden">
+<div class="tabs">
+<div class="tab active" onclick="switchTab(0)">
+<i class="fas fa-crosshairs"></i> Combat
+</div>
+<div class="tab" onclick="switchTab(1)">
+<i class="fas fa-tachometer-alt"></i> Performance
+</div>
+<div class="tab" onclick="switchTab(2)">
+<i class="fas fa-magic"></i> Fov
+</div>
+<div class="tab" onclick="switchTab(3)">
+<i class="fas fa-info-circle"></i> Info
+</div>
+</div>
+
+<!-- TAB 0: COMBAT -->
+<div class="tab-content active" id="tab0">
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-crosshairs"></i></div>
+<span>Aimbot Legit</span>
+</div>
+<div class="toggle" id="toggleAimbot" onclick="toggleFeature('toggleAimbot')"></div>
+</div>
+<div class="slider-wrapper">
+<div class="slider-header">
+<span class="slider-label">Smoothness</span>
+<span class="slider-value" id="valueSmooth">50%</span>
+</div>
+<input type="range" class="slider" id="sliderSmooth" min="0" max="100" value="50" oninput="updateSlider('sliderSmooth','valueSmooth')">
+</div>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-bullseye"></i></div>
+<span>Headshot Lock</span>
+</div>
+<div class="toggle" id="toggleHead" onclick="toggleFeature('toggleHead')"></div>
+</div>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-magic"></i></div>
+<span>No Recoil</span>
+</div>
+<div class="toggle" id="toggleRecoil" onclick="toggleFeature('toggleRecoil')"></div>
+</div>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-expand"></i></div>
+<span>Auto Scope</span>
+</div>
+<div class="toggle" id="toggleScope" onclick="toggleFeature('toggleScope')"></div>
+</div>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-fire"></i></div>
+<span>Fast Fire Rate</span>
+</div>
+<div class="toggle" id="toggleFireRate" onclick="toggleFeature('toggleFireRate')"></div>
+</div>
+</div>
+</div>
+
+<!-- TAB 1: PERFORMANCE -->
+<div class="tab-content" id="tab1">
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-rocket"></i></div>
+<span>FPS Booster</span>
+</div>
+<div class="toggle" id="toggleFPS" onclick="toggleFeature('toggleFPS');updateFPSBoost()"></div>
+</div>
+<div class="slider-wrapper">
+<div class="slider-header">
+<span class="slider-label">Boost Level</span>
+<span class="slider-value" id="valueFPSBoost">Medium</span>
+</div>
+<input type="range" class="slider" id="sliderFPSBoost" min="1" max="3" value="2" oninput="updateFPSBoostLevel()">
+<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:4px">
+<span>Low</span>
+<span>Medium</span>
+<span>High</span>
+</div>
+</div>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-broom"></i></div>
+<span>Memory Optimizer</span>
+</div>
+</div>
+<button class="btn btn-secondary" onclick="optimizeMemory()">
+<i class="fas fa-sync"></i> Clear Cache & RAM
+</button>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-temperature-low"></i></div>
+<span>CPU Cooler</span>
+</div>
+<div class="toggle" id="toggleCooler" onclick="toggleFeature('toggleCooler')"></div>
+</div>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+<span>Network Boost</span>
+</div>
+<div class="toggle" id="toggleNetwork" onclick="toggleFeature('toggleNetwork')"></div>
+</div>
+<div class="slider-wrapper">
+<div class="slider-header">
+<span class="slider-label">Ping Reduction</span>
+<span class="slider-value" id="valuePing">-20ms</span>
+</div>
+<input type="range" class="slider" id="sliderPing" min="10" max="50" value="20" oninput="updateSlider('sliderPing','valuePing','-','ms')">
+</div>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-label">FPS Boost</div>
+<div class="stat-value" id="statFPS">+0</div>
+</div>
+<div class="stat-card">
+<div class="stat-label">Ping</div>
+<div class="stat-value" id="statPing">0ms</div>
+</div>
+</div>
+</div>
+
+<!-- TAB 2: VISUAL -->
+<div class="tab-content" id="tab2">
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-eye"></i></div>
+<span>AIM FOV</span>
+</div>
+<div class="toggle" id="toggleESP" onclick="toggleFeature('toggleESP')"></div>
+</div>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-box"></i></div>
+<span>Trick Head</span>
+</div>
+<div class="toggle" id="toggleItemESP" onclick="toggleFeature('toggleItemESP')"></div>
+</div>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-circle"></i></div>
+<span>FOV Circle</span>
+</div>
+<div class="toggle" id="toggleFOV" onclick="toggleFeature('toggleFOV')"></div>
+</div>
+<div class="slider-wrapper">
+<div class="slider-header">
+<span class="slider-label">Size</span>
+<span class="slider-value" id="valueFOV">100px</span>
+</div>
+<input type="range" class="slider" id="sliderFOV" min="50" max="300" value="100" oninput="updateSlider('sliderFOV','valueFOV','','px')">
+</div>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-adjust"></i></div>
+<span>Color Enhancer</span>
+</div>
+<div class="toggle" id="toggleColor" onclick="toggleFeature('toggleColor')"></div>
+</div>
+<div class="slider-wrapper">
+<div class="slider-header">
+<span class="slider-label">Intensity</span>
+<span class="slider-value" id="valueColor">50%</span>
+</div>
+<input type="range" class="slider" id="sliderColor" min="0" max="100" value="50" oninput="updateSlider('sliderColor','valueColor')">
+</div>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-sun"></i></div>
+<span>Remove Fog</span>
+</div>
+<div class="toggle" id="toggleFog" onclick="toggleFeature('toggleFog')"></div>
+</div>
+</div>
+
+<div class="feature-card">
+<span class="status-badge active-badge">● ACTIVE</span>
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-tree"></i></div>
+<span>Remove Grass</span>
+</div>
+<div class="toggle" id="toggleGrass" onclick="toggleFeature('toggleGrass')"></div>
+</div>
+</div>
+</div>
+
+<!-- TAB 3: INFO -->
+<div class="tab-content" id="tab3">
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-label">Version</div>
+<div class="stat-value">3.0</div>
+</div>
+<div class="stat-card">
+<div class="stat-label">Status</div>
+<div class="stat-value">Active</div>
+</div>
+<div class="stat-card">
+<div class="stat-label">Uptime</div>
+<div class="stat-value">2026</div>
+</div>
+<div class="stat-card">
+<div class="stat-label">Users</div>
+<div class="stat-value">1 user</div>
+</div>
+</div>
+
+<div class="feature-card" style="margin-top:16px">
+<div class="feature-header">
+<div class="feature-title">
+<div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+<span>Anti-Ban Protection</span>
+</div>
+<div class="toggle active" id="toggleBan"></div>
+</div>
+<p style="color:var(--muted);font-size:12px;line-height:1.6;margin-top:8px">
+Always enabled for maximum safety. Our advanced protection system keeps you undetected.
+</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-title" style="margin-bottom:12px">
+<div class="feature-icon"><i class="fas fa-info-circle"></i></div>
+<span>Information</span>
+</div>
+<p style="color:var(--muted);font-size:13px;line-height:1.8">
+<strong style="color:var(--accent)">SensiAura External v1.0</strong> - Premium enhancement system designed specifically for Free Fire. All features are constantly updated to ensure maximum performance, safety and effectiveness.
+</p>
+</div>
+
+<button class="btn btn-secondary" style="margin-top:16px" onclick="logout()">
+<i class="fas fa-sign-out-alt"></i> Logout
+</button>
+</div>
+
+<button class="btn btn-primary" style="margin-top:16px" onclick="inject()">
+<i class="fas fa-syringe"></i> Inject & Launch Free Fire
+</button>
+</div>
+</div>
+</div>
+
+<div id="terminalOverlay" class="terminal-overlay">
+<div class="terminal-window">
+<div class="terminal-header">
+<div class="terminal-dots">
+<div class="terminal-dot red"></div>
+<div class="terminal-dot yellow"></div>
+<div class="terminal-dot green"></div>
+</div>
+<div class="terminal-title">
+<i class="fas fa-terminal"></i>
+SENSIAURA INJECTOR v1.0
+</div>
+</div>
+<div class="terminal-body" id="terminalBody"></div>
+</div>
+</div>
+
+<script>
+'use strict';
+const VALID_KEYS={'SENSIAURA.2026-HS-3DSS':{password:'VIP1SS.SENSIAURA',user:'VIP User',expires:'2026-12-31'}};
+let currentUser=null;
+
+function showAlert(msg,type){
+const box=document.getElementById('alertBox');
+box.textContent=msg;
+box.className='alert alert-'+type+' show';
+setTimeout(()=>box.classList.remove('show'),4000);
+}
+
+function validateKey(){
+const key=document.getElementById('keyInput').value.trim().toUpperCase();
+const pass=document.getElementById('passwordInput').value.trim();
+const alert=document.getElementById('alertBox');
+if(!key||!pass){showAlert('Please enter both key and password','error');return}
+const btn=event.target;
+btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Validating...';
+btn.disabled=true;
+setTimeout(()=>{
+if(VALID_KEYS[key]&&VALID_KEYS[key].password===pass){
+currentUser={key,user:VALID_KEYS[key].user,expires:VALID_KEYS[key].expires};
+showAlert('Authentication successful! Welcome '+currentUser.user,'success');
+setTimeout(()=>{
+document.getElementById('loginSection').classList.add('hidden');
+document.getElementById('mainPanel').classList.remove('hidden');
+},1000);
+}else{
+showAlert('Invalid license key or password','error');
+btn.innerHTML='<i class="fas fa-shield-alt"></i> Validate & Login';
+btn.disabled=false;
+}
+},1500);
+}
+
+function logout(){
+document.getElementById('mainPanel').classList.add('hidden');
+document.getElementById('loginSection').classList.remove('hidden');
+document.getElementById('keyInput').value='';
+document.getElementById('passwordInput').value='';
+showAlert('Logged out successfully','success');
+currentUser=null;
+}
+
+function switchTab(n){
+document.querySelectorAll('.tab').forEach((t,i)=>{
+t.classList.toggle('active',i===n);
+});
+document.querySelectorAll('.tab-content').forEach((c,i)=>{
+c.classList.toggle('active',i===n);
+});
+}
+
+function toggleFeature(id){
+const toggle=document.getElementById(id);
+const isActive=toggle.classList.toggle('active');
+createRipple(toggle);
+
+// Marcar la feature card como activa
+const card=toggle.closest('.feature-card');
+if(card){
+if(isActive){
+card.classList.add('active');
+// Efecto de partículas al activar
+createParticlesBurst(card);
+}else{
+card.classList.remove('active');
+}
+}
+}
+
+function createParticlesBurst(element){
+const rect=element.getBoundingClientRect();
+const colors=['#ff4655','#10b981','#f59e0b'];
+for(let i=0;i<8;i++){
+const particle=document.createElement('div');
+particle.style.position='fixed';
+particle.style.left=rect.left+rect.width/2+'px';
+particle.style.top=rect.top+rect.height/2+'px';
+particle.style.width='6px';
+particle.style.height='6px';
+particle.style.borderRadius='50%';
+particle.style.background=colors[Math.floor(Math.random()*colors.length)];
+particle.style.pointerEvents='none';
+particle.style.zIndex='9999';
+const angle=Math.random()*Math.PI*2;
+const velocity=50+Math.random()*50;
+const vx=Math.cos(angle)*velocity;
+const vy=Math.sin(angle)*velocity;
+particle.style.animation='particleBurst 0.8s ease-out forwards';
+particle.style.setProperty('--vx',vx+'px');
+particle.style.setProperty('--vy',vy+'px');
+document.body.appendChild(particle);
+setTimeout(()=>particle.remove(),800);
+}
+}
+
+// Agregar CSS para las partículas
+const particleStyle=document.createElement('style');
+particleStyle.textContent=`
+@keyframes particleBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--vx), var(--vy)) scale(0);
+    opacity: 0;
+  }
+}
+`;
+document.head.appendChild(particleStyle);
+
+function createRipple(element){
+const ripple=document.createElement('span');
+const rect=element.getBoundingClientRect();
+const size=Math.max(rect.width,rect.height);
+const x=rect.width/2;
+const y=rect.height/2;
+ripple.style.width=ripple.style.height=size+'px';
+ripple.style.left=x-size/2+'px';
+ripple.style.top=y-size/2+'px';
+ripple.style.position='absolute';
+ripple.style.borderRadius='50%';
+ripple.style.background='rgba(255,255,255,0.6)';
+ripple.style.transform='scale(0)';
+ripple.style.animation='ripple 0.6s ease-out';
+ripple.style.pointerEvents='none';
+element.style.position='relative';
+element.style.overflow='hidden';
+element.appendChild(ripple);
+setTimeout(()=>ripple.remove(),600);
+}
+
+// Agregar CSS para la animación de ripple
+const style=document.createElement('style');
+style.textContent=`
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+`;
+document.head.appendChild(style);
+
+function updateSlider(sliderId,valueId,prefix='',suffix='%'){
+const slider=document.getElementById(sliderId);
+const valueDisplay=document.getElementById(valueId);
+valueDisplay.textContent=prefix+slider.value+suffix;
+// Animación del valor cuando cambia
+valueDisplay.style.transform='scale(1.2)';
+valueDisplay.style.transition='transform 0.2s cubic-bezier(0.34,1.56,0.64,1)';
+setTimeout(()=>{
+valueDisplay.style.transform='scale(1)';
+},200);
+}
+
+function updateFPSBoostLevel(){
+const slider=document.getElementById('sliderFPSBoost');
+const valueDisplay=document.getElementById('valueFPSBoost');
+const levels=['Low','Medium','High'];
+valueDisplay.textContent=levels[slider.value-1];
+updateFPSBoost();
+}
+
+function updateFPSBoost(){
+const toggle=document.getElementById('toggleFPS');
+const slider=document.getElementById('sliderFPSBoost');
+const statFPS=document.getElementById('statFPS');
+if(toggle.classList.contains('active')){
+const boosts=[15,30,45];
+statFPS.textContent='+'+(boosts[slider.value-1]);
+}else{
+statFPS.textContent='+0';
+}
+}
+
+function optimizeMemory(){
+const btn=event.target;
+const originalHTML=btn.innerHTML;
+btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Optimizing...';
+btn.disabled=true;
+setTimeout(()=>{
+showAlert('✓ Memory optimized successfully! +15 FPS boost','success');
+btn.innerHTML=originalHTML;
+btn.disabled=false;
+},2000);
+}
+
+function inject(){
+document.getElementById('terminalOverlay').classList.add('show');
+const body=document.getElementById('terminalBody');
+body.innerHTML='';
+
+const COMMANDS=[
+{cmd:'root@sensiaura:~$ ./sensiaura_inject.sh',d:100,t:'info'},
+{cmd:'> Initializing SensiAura External v3.0...',d:250,t:'normal'},
+{cmd:'> Checking system compatibility...',d:400,t:'normal'},
+{cmd:'[✓] Android detected',d:600,t:'success'},
+{cmd:'[✓] ARM64 architecture verified',d:750,t:'success'},
+{cmd:'[✓] Root/ADB access confirmed',d:900,t:'success'},
+{cmd:'> Scanning Free Fire process...',d:1100,t:'normal'},
+{cmd:'[✓] com.dts.freefireth (PID: 15847)',d:1300,t:'success'},
+{cmd:'[✓] Memory regions mapped successfully',d:1450,t:'success'},
+{cmd:'> Loading enhancement modules...',d:1650,t:'warning'},
+{cmd:'  ├─ aimbot.so [████████████] 100%',d:1850,t:'normal'},
+{cmd:'  ├─ headshot.so [████████████] 100%',d:2000,t:'normal'},
+{cmd:'  ├─ fps_boost.so [████████████] 100%',d:2150,t:'normal'},
+{cmd:'  ├─ esp_render.so [████████████] 100%',d:2300,t:'normal'},
+{cmd:'  ├─ recoil_control.so [████████████] 100%',d:2450,t:'normal'},
+{cmd:'  └─ optimizer.so [████████████] 100%',d:2600,t:'normal'},
+{cmd:'[✓] All modules loaded successfully',d:2750,t:'success'},
+{cmd:'> Applying configurations...',d:2950,t:'normal'},
+{cmd:'[✓] Combat features: ACTIVE',d:3100,t:'success'},
+{cmd:'[✓] Performance boost: +30 FPS',d:3250,t:'success'},
+{cmd:'[✓] Visual enhancements: ENABLED',d:3400,t:'success'},
+{cmd:'> Bypassing anti-cheat...',d:3600,t:'warning'},
+{cmd:'[✓] Signature validation bypassed',d:3800,t:'success'},
+{cmd:'[✓] Memory protection active',d:3950,t:'success'},
+{cmd:'[✓] Anti-detection enabled',d:4100,t:'success'},
+{cmd:'> Finalizing injection...',d:4300,t:'normal'},
+{cmd:'━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',d:4500,t:'info'},
+{cmd:'[SUCCESS] Injection completed!',d:4700,t:'success'},
+{cmd:'Status: ACTIVE | Protection: ON | FPS: +30',d:4900,t:'info'},
+{cmd:'━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',d:5100,t:'info'},
+{cmd:'Launching Free Fire...',d:5350,t:'warning'}
+];
+
+COMMANDS.forEach((c,i)=>{
+setTimeout(()=>{
+const line=document.createElement('div');
+line.style.animationDelay=(i*0.05)+'s';
+line.className='terminal-line '+c.t;
+line.textContent=c.cmd;
+body.appendChild(line);
+body.scrollTop=body.scrollHeight;
+if(i===COMMANDS.length-1){
+setTimeout(()=>{
+const cursor=document.createElement('span');
+cursor.className='terminal-cursor';
+body.appendChild(cursor);
+setTimeout(()=>{
+document.getElementById('terminalOverlay').classList.remove('show');
+launchGame();
+},2000);
+},200);
+}
+},c.d);
+});
+}
+
+function launchGame(){
+const links=['freefire://','intent://com.dts.freefireth#Intent;scheme=freefire;package=com.dts.freefireth;end'];
+let opened=false;
+for(const link of links){
+try{
+const a=document.createElement('a');
+a.href=link;
+a.style.display='none';
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+opened=true;
+break;
+}catch(e){}
+}
+if(!opened)try{window.location.href='freefire://'}catch(e){}
+setTimeout(()=>{
+if(!opened){
+try{window.open('market://details?id=com.dts.freefireth','_blank')}
+catch(e){window.open('https://play.google.com/store/apps/details?id=com.dts.freefireth','_blank')}
+}
+},1500);
+}
+
+document.getElementById('keyInput').addEventListener('input',function(e){
+let val=e.target.value.replace(/[^A-Z0-9.\-]/gi,'');
+e.target.value=val;
+});
+
+['keyInput','passwordInput'].forEach(id=>{
+document.getElementById(id).addEventListener('keypress',e=>{
+if(e.key==='Enter')validateKey();
+});
+});
+
+// Simulate ping
+setInterval(()=>{
+const ping=Math.floor(Math.random()*20)+30;
+document.getElementById('statPing').textContent=ping+'ms';
+},2000);
+
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+const particles=[];
+for(let i=0;i<50;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+vx:(Math.random()-0.5)*0.5,
+vy:(Math.random()-0.5)*0.5,
+r:Math.random()*2+1
+});
+}
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle='rgba(255,70,85,0.5)';
+particles.forEach(p=>{
+p.x+=p.vx;
+p.y+=p.vy;
+if(p.x<0||p.x>canvas.width)p.vx*=-1;
+if(p.y<0||p.y>canvas.height)p.vy*=-1;
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+});
+requestAnimationFrame(animate);
+}
+animate();
+window.addEventListener('resize',()=>{
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+});
+</script>
+</body>
+</html>
